@@ -10,6 +10,8 @@ import ParkourPage from './pages/ParkourPage'
 import StoriesPage from './pages/StoriesPage'
 import IdentityPage from './pages/IdentityPage'
 import CommunityPage from './pages/CommunityPage'
+import ResonanceWallPage from './pages/ResonanceWallPage'
+import CardDetailPage from './pages/CardDetailPage'
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
           <Route path="/parkour/stories" element={<StoriesPage />} />
           <Route path="/identity" element={<IdentityPage />} />
           <Route path="/identity/community" element={<CommunityPage />} />
+          <Route path="/identity/resonance" element={<ResonanceWallPage />} />
+          <Route path="/identity/resonance/:id" element={<CardDetailPage />} />
         </Routes>
       </AnimatePresence>
     </div>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Users } from 'lucide-react'
+import { ArrowLeft, Users, Sparkles } from 'lucide-react'
 import PageWrapper from '@/components/PageWrapper'
 import Tape from '@/components/Tape'
 import { useAppStore } from '@/store/useAppStore'
@@ -8,22 +8,14 @@ import { identityFragments } from '@/data/identityFragments'
 
 export default function CommunityPage() {
   const identityCards = useAppStore((state) => state.identityCards)
+  const getFragmentPopularity = useAppStore((state) => state.getFragmentPopularity)
 
-  const fragmentCounts: Record<string, number> = {}
-  for (const card of identityCards) {
-    for (const id of card.selectedFragments) {
-      fragmentCounts[id] = (fragmentCounts[id] || 0) + 1
-    }
-  }
-
-  const topFragments = Object.entries(fragmentCounts)
-    .map(([id, count]) => {
-      const fragment = identityFragments.find((f) => f.id === id)
-      return { fragment, count }
-    })
-    .filter((x) => x.fragment)
-    .sort((a, b) => b.count - a.count)
+  const topFragments = getFragmentPopularity()
     .slice(0, 10)
+    .map((item) => ({
+      fragment: item.fragment,
+      count: item.count,
+    }))
 
   return (
     <PageWrapper>
@@ -39,7 +31,14 @@ export default function CommunityPage() {
         <h1 className="handwritten text-3xl md:text-4xl text-ink-black">
           👥 群体共鸣
         </h1>
-        <div className="w-[140px]" />
+        <Link
+          to="/identity/resonance"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-neon-orange text-white border-3 border-ink-black font-bold"
+          style={{ boxShadow: '3px 3px 0 #1A1A1A' }}
+        >
+          <Sparkles size={18} />
+          共鸣墙
+        </Link>
       </div>
 
       {identityCards.length === 0 ? (

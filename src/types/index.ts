@@ -82,6 +82,26 @@ export interface IdentityCard {
   nickname: string
   personalQuote: string
   createdAt: number
+  ownerId?: string
+}
+
+export type ResponseType = 'encouragement' | 'fragment'
+
+export interface CardResponse {
+  id: string
+  cardId: string
+  type: ResponseType
+  content: string
+  fragmentId?: string
+  responderNickname: string
+  responderAvatar: string
+  createdAt: number
+}
+
+export interface CardWithStats extends IdentityCard {
+  responseCount: number
+  fragmentMatches: number
+  hotScore: number
 }
 
 export interface UserProfile {

@@ -50,6 +50,7 @@ export default function IdentityPage() {
       nickname: nickname || '流动少年',
       personalQuote: quote || '我的故事，还在继续书写中...',
       createdAt: Date.now(),
+      ownerId: 'current',
     }
     addIdentityCard(card)
     setShowCard(true)
@@ -309,14 +310,24 @@ export default function IdentityPage() {
           选择属于你的经历碎片，拼出独一无二的"流动少年身份卡"
         </p>
         {identityCards.length > 0 && (
-          <Link
-            to="/identity/community"
-            className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-white border-3 border-ink-black font-bold text-ink-black"
-            style={{ boxShadow: '3px 3px 0 #1A1A1A' }}
-          >
-            <Users size={18} />
-            看看群体共鸣 ({identityCards.length})
-          </Link>
+          <div className="flex gap-3 justify-center mt-4">
+            <Link
+              to="/identity/community"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white border-3 border-ink-black font-bold text-ink-black"
+              style={{ boxShadow: '3px 3px 0 #1A1A1A' }}
+            >
+              <Users size={18} />
+              群体共鸣 ({identityCards.length})
+            </Link>
+            <Link
+              to="/identity/resonance"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-neon-orange text-white border-3 border-ink-black font-bold"
+              style={{ boxShadow: '3px 3px 0 #1A1A1A' }}
+            >
+              <Sparkles size={18} />
+              共鸣墙
+            </Link>
+          </div>
         )}
       </motion.div>
 
