@@ -259,6 +259,7 @@ export default function CardDetailPage() {
   const navigate = useNavigate()
 
   const identityCards = useAppStore((state) => state.identityCards)
+  const cardResponses = useAppStore((state) => state.cardResponses)
   const getResponsesForCard = useAppStore((state) => state.getResponsesForCard)
   const getCardsWithStats = useAppStore((state) => state.getCardsWithStats)
   const removeIdentityCard = useAppStore((state) => state.removeIdentityCard)
@@ -276,7 +277,7 @@ export default function CardDetailPage() {
   const cardWithStats = useMemo(() => {
     const stats = getCardsWithStats()
     return stats.find((c) => c.id === id)
-  }, [getCardsWithStats, id])
+  }, [getCardsWithStats, id, identityCards, cardResponses])
 
   const fragments = useMemo(() => {
     if (!card) return []

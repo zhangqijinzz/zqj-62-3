@@ -370,16 +370,21 @@ function EmptyState() {
 export default function ResonanceWallPage() {
   const navigate = useNavigate()
   const profile = useAppStore((state) => state.profile)
-  const getCardsWithStats = useAppStore((state) => state.getCardsWithStats)
+  const identityCards = useAppStore((state) => state.identityCards)
+  const cardResponses = useAppStore((state) => state.cardResponses)
   const addResponse = useAppStore((state) => state.addResponse)
   const removeIdentityCard = useAppStore((state) => state.removeIdentityCard)
+  const getCardsWithStats = useAppStore((state) => state.getCardsWithStats)
 
   const [activeCategory, setActiveCategory] = useState<FragmentCategory | 'all'>('all')
   const [sortType, setSortType] = useState<SortType>('hot')
   const [responseModalCard, setResponseModalCard] = useState<CardWithStats | null>(null)
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null)
 
-  const cardsWithStats = useMemo(() => getCardsWithStats(), [getCardsWithStats])
+  const cardsWithStats = useMemo(
+    () => getCardsWithStats(),
+    [getCardsWithStats, identityCards, cardResponses],
+  )
 
   const filteredAndSortedCards = useMemo(() => {
     let result = [...cardsWithStats]
